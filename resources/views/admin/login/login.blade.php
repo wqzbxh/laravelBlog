@@ -7,7 +7,6 @@
 
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-  <script src="https://cdn.bootcdn.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="{{ URL::asset('lib') }}/html5shiv.js"></script>
 <script type="text/javascript" src="{{ URL::asset('lib') }}/respond.min.js"></script>
@@ -19,6 +18,7 @@
 <!--[if IE 6]>
 <script type="text/javascript" src="{{ URL::asset('lib') }}/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
+<script type="text/javascript" src="{{ URL::asset('static') }}/h-ui/js/form.min.js"></script>
 <![endif]-->
 <title>后台登录6425</title>
 <meta name="keywords" content="登录页面">
@@ -29,7 +29,7 @@
 {{--<div class="header"></div>--}}
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
-    <form class="form form-horizontal" action="login\loginAction" method="post">
+    <form class="form form-horizontal" id="form1" action="login\loginAction" method="post">
       {{ csrf_field() }}
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
@@ -57,7 +57,7 @@
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+          <input type="submit" class="btn btn-success radius size-L" id="" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
         </div>
       </div>
@@ -78,10 +78,16 @@
 </div>
 
 <div class="footer">Copyright Wqzbxh個人文章博客</div>
-<script type="text/javascript" src="{{ URL::asset('lib') }}/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="{{ URL::asset('lib') }}/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('static') }}/h-ui/js/H-ui.min.js"></script>
-<!--此乃百度统计代码，请自行删除-->
 
-<!--/此乃百度统计代码，请自行删除
-</body>
-</html>php artisan make:request Users
+<script>
+  $(function () {
+    var options = {
+      success: function (data) {
+        console.log(data)
+      }
+    };
+    $("#form1").ajaxForm(options);
+  });
+</script>
