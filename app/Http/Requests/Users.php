@@ -26,7 +26,9 @@ class Users extends FormRequest
         return [
             'password' => 'required|max:50',
             'access' => 'required',
+            'captcha' => 'required|captcha',
         ];
+
     }
     /**
      * 获取已定义的验证规则的错误消息。
@@ -39,6 +41,8 @@ class Users extends FormRequest
             'password.required' => '密码不能为空',
             'password.max' => '密码长度在0-50',
             'access.required'  => '账号不能为空',
+            'captcha.required'  => '验证码不能为空',
+            'captcha.captcha' =>'验证码错误',
         ];
     }
 }

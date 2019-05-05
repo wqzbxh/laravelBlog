@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mews\Captcha\Captcha;
 
 class LoginController extends Controller
 {
@@ -19,8 +20,6 @@ class LoginController extends Controller
      */
     public function loginAction(Users $request)
     {
-        var_dump($request->input());
-
-        echo 2;
+        return json_encode(array('code' => 1));
     }
 }

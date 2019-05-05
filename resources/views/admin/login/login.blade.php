@@ -46,7 +46,7 @@
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
           <input class="input-text size-L" type="text" placeholder="Security code" style="width:150px;" name="captcha">
-          <img src= "{{captcha_src()}}" id="captcha_img" style="cursor: pointer" onclick="this.src='{{captcha_src()}}'+Math.random()"> </div>
+          <img src= "{{captcha_src()}}" id="captcha_img" style="cursor: pointer" onclick="cachess()"> </div>
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
@@ -65,6 +65,7 @@
       @if (count($errors) > 0)
         <div class="alert alert-danger">
           <ul>
+            <?php var_dump($errors->all()) ?>
             @foreach ($errors->all() as $error)
               <li>{{ $error }}</li>
             @endforeach
@@ -80,14 +81,24 @@
 <div class="footer">Copyright Wqzbxh個人文章博客</div>
 <script type="text/javascript" src="{{ URL::asset('lib') }}/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('static') }}/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="{{ URL::asset('static') }}/h-ui/js/hui.js"></script>
 
 <script>
   $(function () {
     var options = {
       success: function (data) {
         console.log(data)
+        hui.iconToast('操作成功', 'success');
+      },error:function(XmlHttpRequest, textStatus, errorThrown){
+        cachess()
+        console.log((JSON.parse(XmlHttpRequest.responseText)).errors.captcha[0])
+
       }
     };
     $("#form1").ajaxForm(options);
+
+    function cachess(){
+      return this.src='{{captcha_src()}}'+Math.random();
+    }
   });
 </script>
