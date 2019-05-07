@@ -3,7 +3,7 @@
 return [
     'characters' => ['2', '3', '4', '6', '7', '8', '9'],
     'default' => [
-        'length' => 4,
+        'length' => 2,
         'width' => 120,
         'height' => 36,
         'quality' => 90,

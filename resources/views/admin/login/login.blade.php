@@ -34,19 +34,19 @@
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
-          <input id="" name="access" type="text" placeholder="Login ID" class="input-text size-L">
+          <input id="" name="access" type="text" placeholder="Login ID"  value="wqzbxh" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-xs-8">
-          <input id="" name="password" type="password" placeholder="CODE OF THE BIBLE" class="input-text size-L">
+          <input id="" name="password" type="password" placeholder="CODE OF THE BIBLE" value="123456" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
           <input class="input-text size-L" type="text" placeholder="Security code" style="width:150px;" name="captcha">
-          <img src= "{{captcha_src()}}" id="captcha_img" style="cursor: pointer" onclick="cachess()"> </div>
+          <img src= "{{captcha_src()}}" id="captcha_img" style="cursor: pointer" onclick="this.src='{{captcha_src()}}'+Math.random()"> </div>
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
@@ -87,18 +87,25 @@
   $(function () {
     var options = {
       success: function (data) {
-        console.log(data)
-        hui.iconToast('操作成功', 'success');
+        if(data.code == 200){
+          console.log(data.code)
+          alert('登录成功！')
+        }
       },error:function(XmlHttpRequest, textStatus, errorThrown){
-        cachess()
-        console.log((JSON.parse(XmlHttpRequest.responseText)).errors.captcha[0])
+        arr = '';
+        var errors = (JSON.parse(XmlHttpRequest.responseText)).errors
+        for (let i in errors) {
+          if(arr==''){
+            arr = errors[i];
+          }else{
+            arr = arr + '|' + errors[i]
+          }
+        }
+        alert(arr);
 
       }
     };
     $("#form1").ajaxForm(options);
 
-    function cachess(){
-      return this.src='{{captcha_src()}}'+Math.random();
-    }
   });
 </script>
