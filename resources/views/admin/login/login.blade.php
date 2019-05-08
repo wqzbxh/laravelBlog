@@ -88,8 +88,10 @@
     var options = {
       success: function (data) {
         if(data.code == 200){
-          console.log(data.code)
-          alert('登录成功！')
+          alert(data.msg)
+          window.location.href="{{url('admin/index')}}";
+        }else{
+          alert(data.msg)
         }
       },error:function(XmlHttpRequest, textStatus, errorThrown){
         arr = '';

@@ -24,7 +24,34 @@ class Users extends Model
     public static function test($data)
     {
 
-       $flights = self::where($data)->first()->toArray();
-        var_dump($flights);
+       $result = self::where($data)->first();
+       if($result){
+            $resultArray = [
+                'code' => 200,
+                'msg' => Error::ERROR[200],
+                'data' => $result->toArray()
+             ];
+       }else{
+           $resultArray = [
+               'code' => 202,
+               'msg' => Error::ERROR[202],
+               'data' => $result->toArray()
+           ];
+       }
+        return $resultArray;
+    }
+
+    /**
+     * 生成随机Token
+     * @return string
+     */
+    public static function createToken()
+    {
+        $pattern = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ';
+        $token = '';
+        for($i = 0 ; $i < 63 ; $i++){
+            $token = $token.$pattern[rand(0,62)];
+        }
+        return $token;
     }
 }

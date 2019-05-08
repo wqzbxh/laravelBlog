@@ -34,6 +34,9 @@ Route::get('blog_details', 'Web\BlogController@blogDetails')->middleware('web');
 Route::get('login','Admin\LoginController@login');
 
 
+Route::get('admin/index', 'Admin\IndexController@index')->middleware('token');
+
+
 
 Route::get('test', function () {})->middleware('token');
 
@@ -42,6 +45,9 @@ Route::group(['middleware'=>['web']],function (){
     Route::post('login/loginAction','Admin\LoginController@loginAction');
 
 });
+
+
+
 
 Route::put('post/{id}', function ($id) {
     //
